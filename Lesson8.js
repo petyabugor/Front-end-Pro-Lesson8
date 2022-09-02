@@ -1,6 +1,6 @@
 let json1 = '{"name": "Alex", "age": "30", "cart":  [{"name":"product1", "price":""},{"name":"product2", "price":"70"}] }'
 let json2 = '{"name": "Jhon", "age": "30", "cart":  [{"name":"product1", "price":"100"},{"name":"product2", "price":"70"}] }'
-let json3 = '{"name": "Jhon", "age": "30", "car":  [{"name":"product1", "price":"50"},{"name":"product2", "price":"70"}] }'
+let json3 = '{"name": "Jhon", "age": "30", "cart":  {"name":"product1", "price":"200"} }'
 
 
 //1)
@@ -18,31 +18,24 @@ parse(json1)
 
 //2)
 function parse2(object){
-  try{
   let user =JSON.parse(object)
+  if(user?.cart[0]?.price){
   console.log(user?.cart[0]?.price)
-  } catch(error) {
-    console.log('Произошла ошибка')
-  }
+} else{
+  console.log('Произошла ошибка')}
 }
 parse2(json2)
 
 
 //3)
 function parse3(object){
-  try{
-  let user =JSON.parse(object)
-  console.log(user?.cart[0]?.price)
-  } catch(error) {
-    if(error.name != 'SyntaxError')
-    throw error;
+  let user = JSON.parse(object)
+  if(user && user.cart[0] && user.cart[0].price){
+  console.log(user.cart[0].price)
+  } else{
+    console.log('Произошла ошибка')
   }
 }
-
-try {
-  parse3(json3);
-} catch (error) {
-  console.log( "Внешний catch поймал: " + error.name );
-}
+parse3(json3)
 
 
